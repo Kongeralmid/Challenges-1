@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encriptador de Texto</title>
+    <style>
+        body {
+            background-color: black;
+            font-family: Tahoma;
+            color: skyblue;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin-top: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            border: 1px solid skyblue;
+            padding: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Encriptador de Texto</h1>
+
+        <div id="encrypt">
+            <h3>Encriptar</h3>
+            <label for="encryptInput">Texto a encriptar:</label>
+            <input type="text" id="encryptInput">
+            <button onclick="encrypt()">Encriptar</button>
+        </div>
+
+        <div id="decrypt">
+            <h3>Desencriptar</h3>
+            <label for="decryptInput">Texto a desencriptar:</label>
+            <input type="text" id="decryptInput">
+            <button onclick="decrypt()">Desencriptar</button>
+        </div>
+
+        <div id="result">
+            <h3>Resultado</h3>
+            <p id="output"></p>
+            <button onclick="copyResult()">Copiar</button>
+        </div>
+    </div>
+
+    <script>
+        function encrypt() {
+            var input = document.getElementById('encryptInput').value;
+            var result = "";
+
+            for (var i = 0; i < input.length; i++) {
+                var char = input.charAt(i);
+                switch (char) {
+                    case "e":
+                        result += "enter";
+                        break;
+                    case "i":
+                        result += "imes";
+                        break;
+                    case "a":
+                        result += "ai";
+                        break;
+                    case "o":
+                        result += "ober";
+                        break;
+                    case "u":
+                        result += "ufat";
+                        break;
+                    default:
+                        result += char;
+                }
+            }
+
+            document.getElementById('output').innerText = result;
+        }
+
+        function decrypt() {
+            var input = document.getElementById('decryptInput').value;
+            var result = "";
+
+            var i = 0;
+            while (i < input.length) {
+            var char = input.charAt(i);
+
+            if (char === "e" && input.substr(i, 5) === "enter") {
+            result += "e";
+            i += 5;
+            } else if (char === "i" && input.substr(i, 4) === "imes") {
+            result += "i";
+            i += 4;
+            } else if (char === "a" && input.substr(i, 2) === "ai") {
+            result += "a";
+            i += 2;
+            } else if (char === "o" && input.substr(i, 4) === "ober") {
+            result += "o";
+            i += 4;
+            } else if (char === "u" && input.substr(i, 4) === "ufat") {
+            result += "u";
+            i += 4;
+            } else {
+            result += char;
+            i++;
+            }
+            }
+
+            document.getElementById('output').innerText = result;
+        }
+
+
+        function copyResult() {
+            var result = document.getElementById('output').innerText;
+            var tempInput = document.createElement("textarea");
+            tempInput.value = result;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+        }
+    </script>
+</body>
+</html>
